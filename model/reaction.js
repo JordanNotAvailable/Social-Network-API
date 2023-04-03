@@ -10,7 +10,7 @@ const reactionSchema = new Schema(
         reactionBody: {
             type: String,
             required: true,
-            max_lengh: 280,
+            validate: [({ length }) => length <= 280, 'Reactions cannot be more than 280 characters long!']
         },
         username: {
             type: String,
@@ -22,11 +22,6 @@ const reactionSchema = new Schema(
             get: createdAtVal => dateFormat(createdAtVal)
         }
     },
-    {
-        toJSON: {
-          getters: true,
-        },
-    }
 )
 
-module.exports = reactionSchema;
+module.exports = { reactionSchema };
