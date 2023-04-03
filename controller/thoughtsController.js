@@ -1,4 +1,5 @@
-const { Thought, User } = require('../model');
+const Thought = require('../model/thought');
+const User = require('../model/user');
 
 const thoughtController = {
 
@@ -32,7 +33,7 @@ const thoughtController = {
                     res.status(404).json({ message: 'Incorrect thought data!' });
                     return;
                 }
-                res.json(dbPizzaData);
+                res.json(thoughtData); // corrected response
             })
             .catch(err => res.json(err));
     },
@@ -43,7 +44,7 @@ const thoughtController = {
                     res.status(404).json({ message: 'No user found with this ID!' });
                     return;
                 }
-                res.json(dbPizzaData);
+                res.json(thoughtData);
             })
             .catch(err => res.json(err));
     },
@@ -54,7 +55,7 @@ const thoughtController = {
                     res.status(404).json({ message: 'No user found with this ID!' });
                     return;
                 }
-                res.json(dbPizzaData);
+                res.json(thoughtData);
             })
             .catch(err => res.json(err));
     },
@@ -64,12 +65,12 @@ const thoughtController = {
             {$push: {reactions: body}},
             { new: true, runValidators: true }
         )
-        .then(thoughtData => {
-            if (!thoughtData) {
+        .then(data => {
+            if (!data) {
                 res.status(404).json({ message: 'Incorrect reaction data!' });
                 return;
             }
-            res.json(dbPizzaData);
+            res.json(data);
         })
         .catch(err => res.json(err));
     },
@@ -79,16 +80,15 @@ const thoughtController = {
             {$pull: {reactions: {reactionId : params.reactionId}}},
             { new: true, runValidators: true }
         )
-        .then(thoughtData => {
-            if (!thoughtData) {
+        .then(data => {
+            if (!data) {
                 res.status(404).json({ message: 'Incorrect reaction data!' });
                 return;
             }
-            res.json(dbPizzaData);
+            res.json(data);
         })
         .catch(err => res.json(err));
     }
 }
-
 
 module.exports = thoughtController;

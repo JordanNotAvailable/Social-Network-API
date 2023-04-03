@@ -7,8 +7,7 @@ const thoughtSchema = new Schema(
         thoughtText: {
             type: String,
             required: true,
-            min_length: 1,
-            max_length: 280,
+            validate: [({ length }) => length > 0 && length <= 280, 'Thoughts can only be between 1 and 280 characters long!']
         },
         createdAt: {
             type: Date,
@@ -18,17 +17,21 @@ const thoughtSchema = new Schema(
         username: {
             type: String,
             required: true,
-        },
-        reactions: {
+        }, 
             reactions: [reactionSchema],
-        }
+        
     },
     {
         toJSON: {
           getters: true,
-        },
+          virtuals: true
+        }
     }
-)
+);
+
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
+});
 
 const Thought = model('thought', thoughtSchema);
 
