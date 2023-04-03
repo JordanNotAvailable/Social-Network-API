@@ -1,5 +1,5 @@
 # **Social Network API**
----
+
 
 ## **Description**
 
@@ -10,7 +10,7 @@ This site was made using MongoDB in pair with Mongoose to create a backend for a
 - <a href="#installation">Installation</a>
 - <a href="#technologies-used">Technologies Used</a>
 - <a href="#usage">Usage</a>
-- <a href="#Deployment">Deployment</a>
+- <a href="#Walk through video">Walk through video</a>
 
 ---
 ## **Installation**
@@ -61,6 +61,6 @@ Below is a demo gif of the site :
 
 ---
 
-## **Deployment**
+## **Walk through video**
 
-Nil
+[This is a link to the walk through video](https://drive.google.com/file/d/1o5i7M1ers4KeAKFtDxEY_RGGVWWWH5nX/view?usp=share_link)

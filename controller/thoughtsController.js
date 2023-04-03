@@ -59,18 +59,18 @@ const thoughtController = {
             })
             .catch(err => res.json(err));
     },
-    addReaction({params, body}, res){
+    addReaction(req, res){
         Thought.findOneAndUpdate(
-            {_id: params.thoughtId},
-            {$push: {reactions: body}},
+            {_id: req.params.thoughtId},
+            {$addToSet: {reactions: req.body}},
             { new: true, runValidators: true }
         )
-        .then(data => {
-            if (!data) {
+        .then(thoughtData => {
+            if (!thoughtData) {
                 res.status(404).json({ message: 'Incorrect reaction data!' });
                 return;
             }
-            res.json(data);
+            res.json(thoughtData);
         })
         .catch(err => res.json(err));
     },
@@ -80,12 +80,12 @@ const thoughtController = {
             {$pull: {reactions: {reactionId : params.reactionId}}},
             { new: true, runValidators: true }
         )
-        .then(data => {
-            if (!data) {
+        .then(thoughtData => {
+            if (!thoughtData) {
                 res.status(404).json({ message: 'Incorrect reaction data!' });
                 return;
             }
-            res.json(data);
+            res.json(thoughtData);
         })
         .catch(err => res.json(err));
     }

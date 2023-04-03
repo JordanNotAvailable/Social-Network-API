@@ -21,7 +21,10 @@ const reactionSchema = new Schema(
             default: Date.now,
             get: createdAtVal => dateFormat(createdAtVal)
         }
-    },
+        
+    },{
+        id: false,
+    }
 )
 
-module.exports = { reactionSchema };
+module.exports = reactionSchema;
